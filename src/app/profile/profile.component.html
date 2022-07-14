@@ -1,0 +1,105 @@
+<div *ngIf="currentUser; else loggedOut" class="my-4">
+
+  <div class="container shadow pf">
+    <header class="jumbotron">
+      <h5>
+        <span class="text-muted">Profile</span>
+      </h5>
+    </header>
+
+    <p class="mt-4">
+      <strong>Username : </strong>
+      <span class="text-muted">{{ currentUser.username }}</span>
+    </p>
+
+    <p class="mt-4">
+      <strong>Full Name : </strong>
+      <span class="text-muted">{{ currentUser.fullName }}</span>
+    </p>
+
+    <p class="mt-4">
+      <strong>Email : </strong>
+      <span class="text-muted">{{ currentUser.email }}</span>
+    </p>
+
+    <p class="mt-4">
+      <strong>Role : </strong>
+      <span class="text-muted">{{ roles }}</span>
+    </p>
+
+  </div>
+
+  <div *ngIf="showCourse" class="container my-5">
+    <h5 class="pp">Your courses</h5>
+    <!-- <p>{{ user.courses }}</p> -->
+    <div class="row">
+      <div *ngFor="let tutorial of user.courses; let i = index" class="col-lg-3 col-md-6 d-flex justify-content-center">
+        <div class="card max-h my-3 overflow-auto border-0 border-bottom" style="width: 18rem;">
+          <img
+            src="{{ tutorial.image }}" alt="img" height="188px">
+          <div class="card-body">
+
+            <h6 class="card-title">{{ tutorial.title }}</h6>
+
+            <div class="text-muted" *ngIf="tutorial.description == ''">
+              <small>This course have no description.</small>
+            </div>
+
+            <div *ngIf="tutorial.description.length >= 40;then content else full"></div>
+
+            <ng-template #content>
+              <div class="text-muted">
+                <small>{{ tutorial.description | slice:0:39 }}...</small>
+              </div>
+            </ng-template>
+            <ng-template #full>
+              <div class="text-muted">
+                <small>{{ tutorial.description }}</small>
+              </div>
+            </ng-template>
+
+            <div class="mt-4">
+              <a class="btn btn-sm btn-primary mt-2" routerLink="/update-course/{{tutorial.id}}">
+                Edit
+              </a>
+
+              <a class="btn btn-sm btn-warning ms-2 mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Delete
+              </a>
+            </div>
+
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Course</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Are you sure to delete this course.
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary btn-small"
+                      data-bs-dismiss="modal">cancel</button>
+                    <button type="button" (click)="deleteCourse(tutorial.id)" class="btn btn-danger btn-small">delete</button>
+
+                    <!-- {{ tutorial.id }} -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<ng-template #loggedOut>
+  Please login.
+</ng-template>

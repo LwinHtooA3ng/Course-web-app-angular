@@ -1,0 +1,64 @@
+.pf{
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.card{
+    transition-duration: 350ms;
+    transition-timing-function:ease-in-out ;
+}
+
+.card:hover{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.card h6{
+    transition-duration: 300ms;
+    transition-timing-function:ease-in-out ;
+}
+
+.card h6:hover{
+    color: #764AF1;
+}
+
+.max-h{
+    min-height: 350px;
+    max-height: 351px;
+}
+
+@media (max-width: 995px){
+    .card{
+        width: 18rem;
+    }
+
+    .max-h{
+        min-height: 350px;
+        max-height: 351px;
+    }
+}
+
+@media (max-width: 768px){
+    .card{
+        width: 18rem;
+    }
+}
+
+@media (max-width: 330px){
+    .card{
+        width: 10rem;
+    }
+
+    .card h5{
+        font-size: 15px;
+
+    }
+
+    .card p{
+        font-size: 10px;
+    }
+
+    .max-h{
+        min-height: 290px;
+        max-height: 291px;
+    }
+}

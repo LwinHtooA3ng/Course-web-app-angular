@@ -1,0 +1,84 @@
+<div class="container-sm my-3">
+
+  <!-- <h5>{{ message }}</h5> -->
+  <h3 class="text-muted mb-3">Courses</h3>
+
+  <div class="my-4">
+    Courses per Page :
+    <select (change)="handlePageSizeChange($event)">
+      <option *ngFor="let size of pageSizes" [ngValue]="size">
+        {{ size }}
+      </option>
+    </select>
+  </div>
+
+  <div class="row ">
+    <div *ngFor="let tutorial of contents | paginate : {
+      itemsPerPage: pageSize,
+      currentPage: page,
+      totalItems: count
+    } ; let i = index" class="col-lg-3 col-md-6 d-flex justify-content-center">
+
+      <!-- <a href="#"> -->
+        <div class="card my-3 max-h overflow-auto border-0 border-bottom" style="width: 18rem;">
+          <!--style="width: 18rem;" -->
+          <!-- <img
+            src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+            class="card-img-top" alt="img"> -->
+            <img
+            src="{{ tutorial.image }}" alt="img" height="188px">
+          <div class="card-body">
+            
+            <h6 class="card-title">{{ tutorial.title }}</h6>
+
+            <div class="text-muted" *ngIf="tutorial.description == ''">
+              <small>This course have no description.</small>
+            </div>
+
+            <div *ngIf="tutorial.description.length >= 40;then content else full"></div>
+
+            <ng-template  #content>
+              <div class="text-muted">
+                <small>{{ tutorial.description | slice:0:39 }}...</small>
+              </div>
+              
+            </ng-template>
+            <ng-template  #full>
+              <div class="text-muted">
+                <small >{{ tutorial.description }}</small>
+              </div>
+              
+            </ng-template>
+
+
+            <div class="card-text text-muted my-1 display-flex justify-content-center">
+              <small><i class="bi bi-person-circle"></i> {{ tutorial.user.fullName }}</small>
+            </div>
+
+          </div>
+        </div>
+      <!-- </a> -->
+    </div>
+    <div class="col-md-12 text-center my-3">
+      <pagination-controls previousLabel="Prev" nextLabel="Next" [responsive]="true"
+        (pageChange)="handlePageChange($event)"></pagination-controls>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- <div class="card my-3 overflow-auto border-bottom border-end">
+        <div class="card-body max-h">
+
+          <h5 class="card-title ttitle my-3">{{ tutorial.title}}</h5>
+          <p class="card-text text-muted">{{ tutorial.description }} </p>
+          <div class="mb-3">
+            <small class="card-text text-muted" *ngIf="tutorial.description == null || tutorial.description == ''">This
+              tutorial haven't description.</small>
+          </div>
+
+          <p class="pp">author - {{ tutorial.user.fullName }}</p>
+
+        </div>
+      </div> -->

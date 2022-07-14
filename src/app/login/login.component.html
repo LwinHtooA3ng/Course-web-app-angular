@@ -1,0 +1,57 @@
+<div class="container myform shadow my-5" *ngIf="!isLoggedIn">
+  <!-- <div class="col-md-12"> -->
+  <!-- <div class="card card-container"> -->
+  <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+
+    <h3 class="mb-4 fw-normal pp">Login</h3>
+    <div class="form-group mt-2 mb-3">
+      <label for="username">Username</label>
+      <input type="text" class="form-control " name="username" [(ngModel)]="form.username" required
+        #username="ngModel" />
+      <small class="text-danger mb-2" *ngIf="username.errors && f.submitted">
+        Username is required!
+      </small>
+    </div>
+    <div class="form-group mt-2">
+      <label for="password">Password</label>
+      <input type="password" class="form-control " name="password" [(ngModel)]="form.password" #password="ngModel"
+        required />
+      <div class="text-danger" *ngIf="password.errors && f.submitted">
+        <small *ngIf="password.errors.required">Password is required</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-primary btn-block mt-3">
+        Login
+      </button>
+    </div>
+
+    <div class="form-group my-3">
+      <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoggedFailed">
+        Login failed: {{ errorMessage }}
+      </div>
+    </div>
+
+    <div>
+      <small>Don't have an account? <a routerLink="/register">Sign up</a></small>
+    </div>
+
+  </form>
+
+
+  <!-- </div> -->
+  <!-- </div> -->
+</div>
+
+<div *ngIf="isLoggedIn">
+  <div class="container mt-5">
+    <div class="alert alert-success">
+      <!-- Logged in as {{ roles }}. -->
+      <small>Login successful.</small>
+    </div>
+  
+    <a routerLink="" class="text-center">Go to
+    home</a>
+  </div>
+</div>

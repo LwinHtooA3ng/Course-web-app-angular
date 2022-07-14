@@ -1,0 +1,100 @@
+<div class="container my-4">
+
+  <!-- <h5>{{ message }}</h5> -->
+  <h4 class="text-muted mb-3">Courses</h4>
+
+  <div class="input-group search my-4">
+    <input type="text" class="form-control" placeholder="search by course title" [(ngModel)]="courseTitle">
+
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="button" (click)="searchCourseName()">Search</button>
+    </div>
+  </div>
+
+  <div class="my-3">
+    Courses per Page :
+    <select (change)="handlePageSizeChange($event)">
+      <option *ngFor="let size of pageSizes" [ngValue]="size">
+        {{ size }}
+      </option>
+    </select>
+  </div>
+
+  <div class="row">
+    <div *ngFor="let tutorial of contents | paginate : {
+        itemsPerPage: pageSize,
+        currentPage: page,
+        totalItems: count
+      } ; let i = index" class="col-lg-3 col-md-6 d-flex justify-content-center">
+      <div class="card my-3 max-h overflow-auto border-0 border-bottom" style="width: 18rem;">
+        <!--style="width: 18rem;" -->
+        <img
+          src="{{ tutorial.image }}"
+          class="card-img-top" alt="img">
+        <div class="card-body">
+          <h6 class="card-title">{{ tutorial.title }}</h6>
+
+          <div class="text-muted" *ngIf="tutorial.description == ''">
+            <small>This course have no description.</small>
+          </div>
+
+          <div *ngIf="tutorial.description.length >= 40;then content else full"></div>
+
+          <ng-template #content>
+            <div class="text-muted">
+              <small>{{ tutorial.description | slice:0:39 }}...</small>
+            </div>
+          </ng-template>
+          <ng-template #full>
+            <div class="text-muted">
+              <small>{{ tutorial.description }}</small>
+            </div>
+            
+          </ng-template>
+
+
+          <div class="card-text text-muted my-1">
+            <small><i class="bi bi-person-circle me-1"></i> {{ tutorial.user.fullName }}</small>
+          </div>
+
+          <a class="btn btn-sm btn-primary my-2" routerLink="/admin/edit-course/{{tutorial.id}}">
+            Edit
+          </a>
+
+          <a class="btn btn-sm btn-danger ms-2 my-2" (click)="deleteCourse(tutorial.id)">
+            Delete
+          </a>
+
+        
+
+        </div>
+      </div>
+      <!-- <div class="card my-3 overflow-auto">
+        <div class="card-body max-h">
+          
+          <h5 class="card-title my-3">{{ tutorial.title}}</h5>
+          <p class="card-text text-muted">{{ tutorial.description }} </p>
+          <div class="mb-3">
+            <small class="card-text text-muted" *ngIf="tutorial.description == null || tutorial.description == ''">This
+              tutorial haven't description.</small>
+          </div>
+          <p class="pp">author - {{ tutorial.user.fullName }}</p>
+
+          <a class="btn btn-sm btn-primary my-2" routerLink="/admin/edit-course/{{tutorial.id}}">
+            Edit
+          </a>
+
+          <a class="btn btn-sm btn-danger ms-2 my-2" (click)="deleteCourse(tutorial.id)">
+            Delete
+          </a>
+
+        </div>
+      </div> -->
+    </div>
+    <div class="col-md-12 text-center my-3">
+      <pagination-controls previousLabel="Prev" nextLabel="Next" [responsive]="true"
+        (pageChange)="handlePageChange($event)"></pagination-controls>
+    </div>
+  </div>
+
+</div>

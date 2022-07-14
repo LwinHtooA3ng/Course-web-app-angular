@@ -1,0 +1,84 @@
+<div class="container my-4">
+
+  <div>
+    <form *ngIf="!submitted && isLoggedIn && isModOrAdmin" name="form" class="submit-form"
+      (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+
+      <div class="form-group">
+        <div>
+
+          <div>
+            <h4 class="mb-4 fw-normal text-muted">Create course</h4>
+          </div>
+
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input [(ngModel)]="form.title" name="title" type="text" class="form-control" id="title" #title="ngModel">
+          </div>
+
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea [(ngModel)]="form.description" name="description" class="form-control" id="description" rows="3"
+              #description="ngModel"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="formFileSm" class="form-label">Course image</label>
+            <div class="row">
+              <div class="col-8">
+                
+                <input (change)="selectFile($event)" class="form-control form-control-sm" id="formFileSm" type="file">
+              </div>
+              <div class="col-4">
+                <button class="btn btn-sm btn-success" (click)="upload()">upload</button>
+              </div>
+            </div>
+            
+            <small class="text-danger">{{ imageMessage }}</small>
+
+            <small class="text-success">{{ imageSuccess }}</small>
+            
+          </div>
+
+          <!-- <div class="row">
+            <div class="col-8">
+                <label class="btn btn-default p-0">
+                    <input type="file" (change)="selectFile($event)">
+                </label>
+            </div>
+            <div class="col-4">
+                <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">Upload</button>
+            </div>
+        </div> -->
+
+
+          <div class="text-danger mb-3">
+            <small>{{ errorMessage }}</small>
+          </div>
+
+
+          <button type="submit" class="btn btn-primary mt-2" (click)="onSubmit()">Submit</button>
+        </div>
+      </div>
+
+    </form>
+
+    <div *ngIf="submitted" class="text-center my-5">
+      <h5 class="mb-4">Your course was created.</h5>
+      <!-- <a><button class="btn btn-dark me-3" style="background-color: #764AF1; border: none;" (click)="newTutorial()">Add another tutorial</button></a> -->
+      <a routerLink=""><button class="btn btn-dark" style="background-color: #764AF1; border: none;">Go to
+          home</button></a>
+    </div>
+
+    <div *ngIf="!isLoggedIn || !isModOrAdmin">
+      <h3 class="text-muted text-center">You need to login admin or moderator account.</h3>
+    </div>
+
+  </div>
+  <!-- <div *ngIf="notLogin" class="text-center my-5">
+      <p class="display-6 text-muted">You need to login to your instructor account.</p>
+      <a routerLink="/login">
+        <p class="pp">Go to instructor login.</p>
+      </a>
+    </div> -->
+</div>

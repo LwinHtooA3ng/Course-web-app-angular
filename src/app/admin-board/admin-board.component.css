@@ -1,0 +1,8 @@
+.hover{
+    transition: 350ms ease-in-out;
+}
+
+
+.hover:hover{
+    font-weight: 500;
+}

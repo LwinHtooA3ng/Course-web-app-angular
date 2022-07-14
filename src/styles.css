@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+
+.pp{
+    color: #764AF1;
+    /* color: #3C096C; */
+}
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    font-size: xx-small;
+}
+
+.myform{
+    max-width: 330px;
+    padding: 30px;
+    border-radius: 15px;
+}
+
+.max-h{
+    min-height: 320px;
+    max-height: 321px;
+}

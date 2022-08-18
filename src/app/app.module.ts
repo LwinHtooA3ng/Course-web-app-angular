@@ -17,6 +17,7 @@ import { AdminBoardModule } from './admin-board/admin-board.module';
 import { AdminBoardRoutingModule } from './admin-board/admin-board-routing.module';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { CourseDetailComponent } from './course-detail/course-detail.component';
     HttpClientModule,
     NgxPaginationModule,
     AdminBoardModule,
+    NgxDropzoneModule,
   ],
   providers: [ authInterceptorProviders ],
   bootstrap: [AppComponent]

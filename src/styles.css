@@ -5,6 +5,10 @@
     /* color: #3C096C; */
 }
 
+.all{
+    height: 100%;
+}
+
 body{
     font-family: 'Montserrat', sans-serif;
     font-size: xx-small;

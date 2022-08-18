@@ -59,6 +59,9 @@ export class EditCourseComponent implements OnInit {
           if(response.code == 423){
             this.message = "This is not your own course"
           }
+          if(response.code == 426){
+            this.message = "Title cann't be empty"
+          }
           if(response.code == 200){
             this.updatted = true
           }
